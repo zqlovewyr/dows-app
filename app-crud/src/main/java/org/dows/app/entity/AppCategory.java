@@ -18,7 +18,7 @@ import java.util.Date;
  * 应用分类(AppCategory)实体类
  *
  * @author lait.zhang
- * @since 2022-10-10 14:15:33
+ * @since 2022-10-19 22:05:41
  */
 @SuppressWarnings("serial")
 @Data
@@ -30,7 +30,7 @@ import java.util.Date;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @ApiModel(value = "AppCategory对象", description = "应用分类")
 public class AppCategory implements CrudEntity {
-    private static final long serialVersionUID = -64968346508090044L;
+    private static final long serialVersionUID = 908517390962250014L;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING)
     @ApiModelProperty("资源类目ID")

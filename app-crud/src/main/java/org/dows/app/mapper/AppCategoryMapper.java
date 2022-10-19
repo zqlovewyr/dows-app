@@ -8,7 +8,7 @@ import org.dows.app.entity.AppCategory;
  * 应用分类(AppCategory)表数据库访问层
  *
  * @author lait.zhang
- * @since 2022-10-10 14:15:34
+ * @since 2022-10-19 22:05:41
  */
 @Mapper
 public interface AppCategoryMapper extends MybatisCrudMapper<AppCategory> {

@@ -18,7 +18,7 @@ import java.util.Date;
  * 申请资料条目(AppApplyItem)实体类
  *
  * @author lait.zhang
- * @since 2022-10-10 14:15:33
+ * @since 2022-10-19 22:05:40
  */
 @SuppressWarnings("serial")
 @Data
@@ -30,7 +30,7 @@ import java.util.Date;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @ApiModel(value = "AppApplyItem对象", description = "申请资料条目")
 public class AppApplyItem implements CrudEntity {
-    private static final long serialVersionUID = 646526784896987378L;
+    private static final long serialVersionUID = 224964162206659339L;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING)
     @ApiModelProperty("主键ID")
