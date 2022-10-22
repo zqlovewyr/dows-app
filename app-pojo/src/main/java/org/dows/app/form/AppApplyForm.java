@@ -14,7 +14,7 @@ import java.util.Date;
  * 应用申请(AppApply)表单
  *
  * @author lait.zhang
- * @since 2022-10-10 14:17:18
+ * @since 2022-10-22 16:50:10
  */
 @SuppressWarnings("serial")
 @Data
@@ -25,7 +25,7 @@ import java.util.Date;
 @NoArgsConstructor
 @ApiModel(value = "AppApplyForm 表单对象", description = "应用申请")
 public class AppApplyForm implements Serializable {
-    private static final long serialVersionUID = -40383696030652958L;
+    private static final long serialVersionUID = 910895302256785608L;
     @JsonIgnore
     private Long id;
 

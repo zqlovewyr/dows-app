@@ -14,7 +14,7 @@ import java.util.Date;
  * 应用分类(AppCategory)表单
  *
  * @author lait.zhang
- * @since 2022-10-10 14:17:18
+ * @since 2022-10-22 16:50:11
  */
 @SuppressWarnings("serial")
 @Data
@@ -25,7 +25,7 @@ import java.util.Date;
 @NoArgsConstructor
 @ApiModel(value = "AppCategoryForm 表单对象", description = "应用分类")
 public class AppCategoryForm implements Serializable {
-    private static final long serialVersionUID = -77224024858307285L;
+    private static final long serialVersionUID = -90187621368320446L;
     @JsonIgnore
     private Long id;
 
@@ -43,6 +43,9 @@ public class AppCategoryForm implements Serializable {
 
     @JsonIgnore
     private Boolean deleted;
+
+    @ApiModelProperty("分类ID(分布式ID)")
+    private String categId;
 
 
 }

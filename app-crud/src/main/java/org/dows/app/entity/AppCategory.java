@@ -18,7 +18,7 @@ import java.util.Date;
  * 应用分类(AppCategory)实体类
  *
  * @author lait.zhang
- * @since 2022-10-19 22:05:41
+ * @since 2022-10-22 16:49:42
  */
 @SuppressWarnings("serial")
 @Data
@@ -30,7 +30,7 @@ import java.util.Date;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @ApiModel(value = "AppCategory对象", description = "应用分类")
 public class AppCategory implements CrudEntity {
-    private static final long serialVersionUID = 908517390962250014L;
+    private static final long serialVersionUID = -20400836389782590L;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING)
     @ApiModelProperty("资源类目ID")
@@ -54,6 +54,9 @@ public class AppCategory implements CrudEntity {
     @TableField(fill = FieldFill.INSERT)
     @ApiModelProperty("是否逻辑删除: 0 未删除(false), 1 已删除(true); 默认: 0")
     private Boolean deleted;
+
+    @ApiModelProperty("分类ID(分布式ID)")
+    private String categId;
 
 }
 

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
  * 应用分类(AppCategory)表服务实现类
  *
  * @author lait.zhang
- * @since 2022-10-19 22:05:41
+ * @since 2022-10-22 16:49:43
  */
 @Service("appCategoryService")
 public class AppCategoryServiceImpl extends MybatisCrudServiceImpl<AppCategoryMapper, AppCategory> implements AppCategoryService {

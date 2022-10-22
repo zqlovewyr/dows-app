@@ -8,7 +8,7 @@ import org.dows.app.entity.AppApplyItem;
  * 申请资料条目(AppApplyItem)表数据库访问层
  *
  * @author lait.zhang
- * @since 2022-10-19 22:05:41
+ * @since 2022-10-22 16:49:42
  */
 @Mapper
 public interface AppApplyItemMapper extends MybatisCrudMapper<AppApplyItem> {
