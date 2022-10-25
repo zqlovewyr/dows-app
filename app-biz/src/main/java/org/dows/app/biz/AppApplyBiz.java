@@ -1,7 +1,6 @@
 package org.dows.app.biz;
 
 import cn.hutool.core.bean.BeanUtil;
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -73,13 +72,13 @@ public class AppApplyBiz {
             queryWrapper.eq("platform",appApplyRequest.getPlatform());
         }
         if(StringUtils.isNotEmpty(appApplyRequest.getAppName())){
-            queryWrapper.eq("appName",appApplyRequest.getAppName());
+            queryWrapper.eq("app_name",appApplyRequest.getAppName());
         }
         if(StringUtils.isNotEmpty(appApplyRequest.getContactName())){
-            queryWrapper.eq("contactName",appApplyRequest.getContactName());
+            queryWrapper.eq("contact_name",appApplyRequest.getContactName());
         }
         if(StringUtils.isNotEmpty(appApplyRequest.getContactPhone())){
-            queryWrapper.eq("contactPhone",appApplyRequest.getContactPhone());
+            queryWrapper.eq("contact_phone",appApplyRequest.getContactPhone());
         }
         AppApply appApply = appApplyService.getOne(queryWrapper);
         return Response.ok(appApply);
