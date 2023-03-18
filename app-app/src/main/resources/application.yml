@@ -1,0 +1,34 @@
+server:
+  port: 9000
+  undertow:
+    buffer-size: 1024
+    direct-buffers: true
+    threads:
+      io: 4
+      worker: 32
+#  servlet:
+#    context-path: /${spring.application.name}
+
+
+logging:
+  level:
+    org.springframework.web: info
+    com.github.binarywang.demo.wx.miniapp: debug
+    cn.binarywang.wx.miniapp: debug
+wx:
+  miniapp:
+    configs:
+      - appid: #微信小程序的appid
+        secret: #微信小程序的Secret
+        token: #微信小程序消息服务器配置的token
+        aesKey: #微信小程序消息服务器配置的EncodingAESKey
+        msgDataFormat: JSON
+
+
+spring:
+  application:
+    name: dows-app
+  profiles:
+    include: mysql,mybatis,mvc,redis,alipay
+    active: sit
+#debug: true

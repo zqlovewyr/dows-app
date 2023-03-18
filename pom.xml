@@ -19,6 +19,8 @@
         <module>app-api</module>
         <module>app-rest</module>
         <module>app-sdk</module>
+        <module>app-config</module>
+        <module>app-app</module>
     </modules>
 
 
