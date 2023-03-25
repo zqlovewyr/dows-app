@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.dows.app.api.mini.request.AppApplyRequest;
+import org.dows.app.api.mini.response.AppApplyResponse;
 import org.dows.app.entity.AppApply;
 import org.dows.app.entity.AppApplyItem;
 import org.dows.app.service.AppApplyItemService;
@@ -27,19 +28,20 @@ public class AppApplyBiz {
     private AppApplyItemService appApplyItemService;
 
     @Transactional
-    public Response saveApply(AppApplyRequest appApplyRequest) {
+    public String saveApply(AppApplyRequest appApplyRequest) {
         // todo 保存AppApply
         AppApply appApply = BeanUtil.copyProperties(appApplyRequest, AppApply.class);
         appApplyService.save(appApply);
         // todo 保存AppApplyItem
         AppApplyItem appApplyItem = BeanUtil.copyProperties(appApplyRequest, AppApplyItem.class);
         appApplyItemService.save(appApplyItem);
-        return Response.ok();
+
+        return null;
     }
 
 
     @Transactional
-    public Response updateApplyPlatformOrderNo(AppApplyRequest appApplyRequest) {
+    public Boolean updateApplyPlatformOrderNo(AppApplyRequest appApplyRequest) {
         // 更新AppApply
         QueryWrapper<AppApply> queryWrapperAppApply = new QueryWrapper();
         if(StringUtils.isNotEmpty(appApplyRequest.getPlatform())){
@@ -57,7 +59,8 @@ public class AppApplyBiz {
         AppApplyItem appApplyItem = new AppApplyItem();
         appApplyItem.setPlatformOrderNo(appApplyRequest.getPlatformOrderNo());
         appApplyItemService.update(appApplyItem,queryWrapperAppApplyItem);
-        return Response.ok();
+        //return AppApplyResponse.builder().build();
+        return Boolean.FALSE;
     }
 
 
@@ -66,7 +69,7 @@ public class AppApplyBiz {
      * @param appApplyRequest
      * @return
      */
-    public Response getOneAppApply(AppApplyRequest appApplyRequest) {
+    public AppApplyResponse getOneAppApply(AppApplyRequest appApplyRequest) {
         QueryWrapper<AppApply> queryWrapper = new QueryWrapper();
         if(StringUtils.isNotEmpty(appApplyRequest.getPlatform())){
             queryWrapper.eq("platform",appApplyRequest.getPlatform());
@@ -81,7 +84,8 @@ public class AppApplyBiz {
             queryWrapper.eq("contact_phone",appApplyRequest.getContactPhone());
         }
         AppApply appApply = appApplyService.getOne(queryWrapper);
-        return Response.ok(appApply);
+        // Response.ok(appApply);
+        return AppApplyResponse.builder().build();
     }
 
 }

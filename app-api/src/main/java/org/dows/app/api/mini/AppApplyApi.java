@@ -11,14 +11,14 @@ public interface AppApplyApi {
      * @param appApplyRequest
      * @return
      */
-    AppApplyResponse saveApply(AppApplyRequest appApplyRequest);
+    String saveApply(AppApplyRequest appApplyRequest);
 
     /**
      * 更新申请
      * @param appApplyRequest
      * @return
      */
-    AppApplyResponse updateApplyPlatformOrderNo(AppApplyRequest appApplyRequest);
+    Boolean updateApplyPlatformOrderNo(AppApplyRequest appApplyRequest);
 
 
     /**
