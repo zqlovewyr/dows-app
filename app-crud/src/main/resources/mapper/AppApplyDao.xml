@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.dows.app.dao.AppApplyDao">
+
+    <resultMap type="org.dows.app.entity.AppApply" id="AppApplyMap">
+        <result property="id" column="id" jdbcType=""/>
+        <result property="categId" column="categ_id" jdbcType=""/>
+        <result property="applyOrderNo" column="apply_order_no" jdbcType=""/>
+        <result property="appId" column="app_id" jdbcType=""/>
+        <result property="appName" column="app_name" jdbcType=""/>
+        <result property="platform" column="platform" jdbcType=""/>
+        <result property="platformOrderNo" column="platform_order_no" jdbcType=""/>
+        <result property="platformAppId" column="platform_app_id" jdbcType=""/>
+        <result property="platformAppName" column="platform_app_name" jdbcType=""/>
+        <result property="applicant" column="applicant" jdbcType=""/>
+        <result property="tenantName" column="tenant_name" jdbcType=""/>
+        <result property="tenantId" column="tenant_id" jdbcType=""/>
+        <result property="deleted" column="deleted" jdbcType=""/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="AppApplyMap">
+        select id,
+               categ_id,
+               apply_order_no,
+               app_id,
+               app_name,
+               platform,
+               platform_order_no,
+               platform_app_id,
+               platform_app_name,
+               applicant,
+               tenant_name,
+               tenant_id,
+               deleted
+        from app_apply
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="AppApplyMap">
+        select
+        id, categ_id, apply_order_no, app_id, app_name, platform, platform_order_no, platform_app_id, platform_app_name,
+        applicant, tenant_name, tenant_id, deleted
+        from app_apply
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="categId != null and categId != ''">
+                and categ_id = #{categId}
+            </if>
+            <if test="applyOrderNo != null and applyOrderNo != ''">
+                and apply_order_no = #{applyOrderNo}
+            </if>
+            <if test="appId != null and appId != ''">
+                and app_id = #{appId}
+            </if>
+            <if test="appName != null and appName != ''">
+                and app_name = #{appName}
+            </if>
+            <if test="platform != null and platform != ''">
+                and platform = #{platform}
+            </if>
+            <if test="platformOrderNo != null and platformOrderNo != ''">
+                and platform_order_no = #{platformOrderNo}
+            </if>
+            <if test="platformAppId != null and platformAppId != ''">
+                and platform_app_id = #{platformAppId}
+            </if>
+            <if test="platformAppName != null and platformAppName != ''">
+                and platform_app_name = #{platformAppName}
+            </if>
+            <if test="applicant != null and applicant != ''">
+                and applicant = #{applicant}
+            </if>
+            <if test="tenantName != null and tenantName != ''">
+                and tenant_name = #{tenantName}
+            </if>
+            <if test="tenantId != null and tenantId != ''">
+                and tenant_id = #{tenantId}
+            </if>
+            <if test="deleted != null">
+                and deleted = #{deleted}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from app_apply
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="categId != null and categId != ''">
+                and categ_id = #{categId}
+            </if>
+            <if test="applyOrderNo != null and applyOrderNo != ''">
+                and apply_order_no = #{applyOrderNo}
+            </if>
+            <if test="appId != null and appId != ''">
+                and app_id = #{appId}
+            </if>
+            <if test="appName != null and appName != ''">
+                and app_name = #{appName}
+            </if>
+            <if test="platform != null and platform != ''">
+                and platform = #{platform}
+            </if>
+            <if test="platformOrderNo != null and platformOrderNo != ''">
+                and platform_order_no = #{platformOrderNo}
+            </if>
+            <if test="platformAppId != null and platformAppId != ''">
+                and platform_app_id = #{platformAppId}
+            </if>
+            <if test="platformAppName != null and platformAppName != ''">
+                and platform_app_name = #{platformAppName}
+            </if>
+            <if test="applicant != null and applicant != ''">
+                and applicant = #{applicant}
+            </if>
+            <if test="tenantName != null and tenantName != ''">
+                and tenant_name = #{tenantName}
+            </if>
+            <if test="tenantId != null and tenantId != ''">
+                and tenant_id = #{tenantId}
+            </if>
+            <if test="deleted != null">
+                and deleted = #{deleted}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into app_apply(categ_id, apply_order_no, app_id, app_name, platform, platform_order_no, platform_app_id,
+                              platform_app_name, applicant, tenant_name, tenant_id, deleted)
+        values (#{categId}, #{applyOrderNo}, #{appId}, #{appName}, #{platform}, #{platformOrderNo}, #{platformAppId},
+                #{platformAppName}, #{applicant}, #{tenantName}, #{tenantId}, #{deleted})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into app_apply(categ_id, apply_order_no, app_id, app_name, platform, platform_order_no, platform_app_id,
+        platform_app_name, applicant, tenant_name, tenant_id, deleted)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.categId}, #{entity.applyOrderNo}, #{entity.appId}, #{entity.appName}, #{entity.platform},
+            #{entity.platformOrderNo}, #{entity.platformAppId}, #{entity.platformAppName}, #{entity.applicant},
+            #{entity.tenantName}, #{entity.tenantId}, #{entity.deleted})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into app_apply(categ_id, apply_order_no, app_id, app_name, platform, platform_order_no, platform_app_id,
+        platform_app_name, applicant, tenant_name, tenant_id, deleted)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.categId}, #{entity.applyOrderNo}, #{entity.appId}, #{entity.appName}, #{entity.platform},
+            #{entity.platformOrderNo}, #{entity.platformAppId}, #{entity.platformAppName}, #{entity.applicant},
+            #{entity.tenantName}, #{entity.tenantId}, #{entity.deleted})
+        </foreach>
+        on duplicate key update
+        categ_id = values(categ_id),
+        apply_order_no = values(apply_order_no),
+        app_id = values(app_id),
+        app_name = values(app_name),
+        platform = values(platform),
+        platform_order_no = values(platform_order_no),
+        platform_app_id = values(platform_app_id),
+        platform_app_name = values(platform_app_name),
+        applicant = values(applicant),
+        tenant_name = values(tenant_name),
+        tenant_id = values(tenant_id),
+        deleted = values(deleted)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update app_apply
+        <set>
+            <if test="categId != null and categId != ''">
+                categ_id = #{categId},
+            </if>
+            <if test="applyOrderNo != null and applyOrderNo != ''">
+                apply_order_no = #{applyOrderNo},
+            </if>
+            <if test="appId != null and appId != ''">
+                app_id = #{appId},
+            </if>
+            <if test="appName != null and appName != ''">
+                app_name = #{appName},
+            </if>
+            <if test="platform != null and platform != ''">
+                platform = #{platform},
+            </if>
+            <if test="platformOrderNo != null and platformOrderNo != ''">
+                platform_order_no = #{platformOrderNo},
+            </if>
+            <if test="platformAppId != null and platformAppId != ''">
+                platform_app_id = #{platformAppId},
+            </if>
+            <if test="platformAppName != null and platformAppName != ''">
+                platform_app_name = #{platformAppName},
+            </if>
+            <if test="applicant != null and applicant != ''">
+                applicant = #{applicant},
+            </if>
+            <if test="tenantName != null and tenantName != ''">
+                tenant_name = #{tenantName},
+            </if>
+            <if test="tenantId != null and tenantId != ''">
+                tenant_id = #{tenantId},
+            </if>
+            <if test="deleted != null">
+                deleted = #{deleted},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from app_apply
+        where id = #{id}
+    </delete>
+
+</mapper>
+

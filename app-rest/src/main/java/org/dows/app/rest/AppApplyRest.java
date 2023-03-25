@@ -4,6 +4,7 @@ package org.dows.app.rest;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.dows.app.api.mini.AppApplyApi;
 import org.dows.framework.crud.mybatis.MybatisCrudRest;
 import org.dows.app.entity.AppApply;
 import org.dows.app.form.AppApplyForm;

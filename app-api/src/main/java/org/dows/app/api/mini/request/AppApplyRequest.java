@@ -1,4 +1,4 @@
-package org.dows.app.api;
+package org.dows.app.api.mini.request;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModelProperty;

@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.dows.app.api.AppApplyRequest;
+import org.dows.app.api.mini.request.AppApplyRequest;
 import org.dows.app.entity.AppApply;
 import org.dows.app.entity.AppApplyItem;
 import org.dows.app.service.AppApplyItemService;

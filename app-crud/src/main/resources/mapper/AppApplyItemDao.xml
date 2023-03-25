@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.dows.app.dao.AppApplyItemDao">
+
+    <resultMap type="org.dows.app.entity.AppApplyItem" id="AppApplyItemMap">
+        <result property="id" column="id" jdbcType=""/>
+        <result property="appId" column="app_id" jdbcType=""/>
+        <result property="appName" column="app_name" jdbcType=""/>
+        <result property="applyOrderNo" column="apply_order_no" jdbcType=""/>
+        <result property="platformOrderNo" column="platform_order_no" jdbcType=""/>
+        <result property="platformAccount" column="platform_account" jdbcType=""/>
+        <result property="platformAppName" column="platform_app_name" jdbcType=""/>
+        <result property="certNo" column="cert_no" jdbcType=""/>
+        <result property="legalName" column="legal_name" jdbcType=""/>
+        <result property="certName" column="cert_name" jdbcType=""/>
+        <result property="contactPhone" column="contact_phone" jdbcType=""/>
+        <result property="contactName" column="contact_name" jdbcType=""/>
+        <result property="deleted" column="deleted" jdbcType=""/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="AppApplyItemMap">
+        select id,
+               app_id,
+               app_name,
+               apply_order_no,
+               platform_order_no,
+               platform_account,
+               platform_app_name,
+               cert_no,
+               legal_name,
+               cert_name,
+               contact_phone,
+               contact_name,
+               deleted
+        from app_apply_item
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="AppApplyItemMap">
+        select
+        id, app_id, app_name, apply_order_no, platform_order_no, platform_account, platform_app_name, cert_no,
+        legal_name, cert_name, contact_phone, contact_name, deleted
+        from app_apply_item
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="appId != null and appId != ''">
+                and app_id = #{appId}
+            </if>
+            <if test="appName != null and appName != ''">
+                and app_name = #{appName}
+            </if>
+            <if test="applyOrderNo != null and applyOrderNo != ''">
+                and apply_order_no = #{applyOrderNo}
+            </if>
+            <if test="platformOrderNo != null and platformOrderNo != ''">
+                and platform_order_no = #{platformOrderNo}
+            </if>
+            <if test="platformAccount != null and platformAccount != ''">
+                and platform_account = #{platformAccount}
+            </if>
+            <if test="platformAppName != null and platformAppName != ''">
+                and platform_app_name = #{platformAppName}
+            </if>
+            <if test="certNo != null and certNo != ''">
+                and cert_no = #{certNo}
+            </if>
+            <if test="legalName != null and legalName != ''">
+                and legal_name = #{legalName}
+            </if>
+            <if test="certName != null and certName != ''">
+                and cert_name = #{certName}
+            </if>
+            <if test="contactPhone != null and contactPhone != ''">
+                and contact_phone = #{contactPhone}
+            </if>
+            <if test="contactName != null and contactName != ''">
+                and contact_name = #{contactName}
+            </if>
+            <if test="deleted != null">
+                and deleted = #{deleted}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from app_apply_item
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="appId != null and appId != ''">
+                and app_id = #{appId}
+            </if>
+            <if test="appName != null and appName != ''">
+                and app_name = #{appName}
+            </if>
+            <if test="applyOrderNo != null and applyOrderNo != ''">
+                and apply_order_no = #{applyOrderNo}
+            </if>
+            <if test="platformOrderNo != null and platformOrderNo != ''">
+                and platform_order_no = #{platformOrderNo}
+            </if>
+            <if test="platformAccount != null and platformAccount != ''">
+                and platform_account = #{platformAccount}
+            </if>
+            <if test="platformAppName != null and platformAppName != ''">
+                and platform_app_name = #{platformAppName}
+            </if>
+            <if test="certNo != null and certNo != ''">
+                and cert_no = #{certNo}
+            </if>
+            <if test="legalName != null and legalName != ''">
+                and legal_name = #{legalName}
+            </if>
+            <if test="certName != null and certName != ''">
+                and cert_name = #{certName}
+            </if>
+            <if test="contactPhone != null and contactPhone != ''">
+                and contact_phone = #{contactPhone}
+            </if>
+            <if test="contactName != null and contactName != ''">
+                and contact_name = #{contactName}
+            </if>
+            <if test="deleted != null">
+                and deleted = #{deleted}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into app_apply_item(app_id, app_name, apply_order_no, platform_order_no, platform_account,
+                                   platform_app_name, cert_no, legal_name, cert_name, contact_phone, contact_name,
+                                   deleted)
+        values (#{appId}, #{appName}, #{applyOrderNo}, #{platformOrderNo}, #{platformAccount}, #{platformAppName},
+                #{certNo}, #{legalName}, #{certName}, #{contactPhone}, #{contactName}, #{deleted})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into app_apply_item(app_id, app_name, apply_order_no, platform_order_no, platform_account,
+        platform_app_name, cert_no, legal_name, cert_name, contact_phone, contact_name, deleted)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.appId}, #{entity.appName}, #{entity.applyOrderNo}, #{entity.platformOrderNo},
+            #{entity.platformAccount}, #{entity.platformAppName}, #{entity.certNo}, #{entity.legalName},
+            #{entity.certName}, #{entity.contactPhone}, #{entity.contactName}, #{entity.deleted})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into app_apply_item(app_id, app_name, apply_order_no, platform_order_no, platform_account,
+        platform_app_name, cert_no, legal_name, cert_name, contact_phone, contact_name, deleted)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.appId}, #{entity.appName}, #{entity.applyOrderNo}, #{entity.platformOrderNo},
+            #{entity.platformAccount}, #{entity.platformAppName}, #{entity.certNo}, #{entity.legalName},
+            #{entity.certName}, #{entity.contactPhone}, #{entity.contactName}, #{entity.deleted})
+        </foreach>
+        on duplicate key update
+        app_id = values(app_id),
+        app_name = values(app_name),
+        apply_order_no = values(apply_order_no),
+        platform_order_no = values(platform_order_no),
+        platform_account = values(platform_account),
+        platform_app_name = values(platform_app_name),
+        cert_no = values(cert_no),
+        legal_name = values(legal_name),
+        cert_name = values(cert_name),
+        contact_phone = values(contact_phone),
+        contact_name = values(contact_name),
+        deleted = values(deleted)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update app_apply_item
+        <set>
+            <if test="appId != null and appId != ''">
+                app_id = #{appId},
+            </if>
+            <if test="appName != null and appName != ''">
+                app_name = #{appName},
+            </if>
+            <if test="applyOrderNo != null and applyOrderNo != ''">
+                apply_order_no = #{applyOrderNo},
+            </if>
+            <if test="platformOrderNo != null and platformOrderNo != ''">
+                platform_order_no = #{platformOrderNo},
+            </if>
+            <if test="platformAccount != null and platformAccount != ''">
+                platform_account = #{platformAccount},
+            </if>
+            <if test="platformAppName != null and platformAppName != ''">
+                platform_app_name = #{platformAppName},
+            </if>
+            <if test="certNo != null and certNo != ''">
+                cert_no = #{certNo},
+            </if>
+            <if test="legalName != null and legalName != ''">
+                legal_name = #{legalName},
+            </if>
+            <if test="certName != null and certName != ''">
+                cert_name = #{certName},
+            </if>
+            <if test="contactPhone != null and contactPhone != ''">
+                contact_phone = #{contactPhone},
+            </if>
+            <if test="contactName != null and contactName != ''">
+                contact_name = #{contactName},
+            </if>
+            <if test="deleted != null">
+                deleted = #{deleted},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from app_apply_item
+        where id = #{id}
+    </delete>
+
+</mapper>
+
