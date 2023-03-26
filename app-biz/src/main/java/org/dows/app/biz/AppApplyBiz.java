@@ -69,7 +69,7 @@ public class AppApplyBiz {
     public Response<AppApply> getOneAppApply(AppApplyRequest appApplyRequest) {
        LambdaQueryWrapper<AppApply> queryWrapper = new LambdaQueryWrapper<AppApply>();
         if(StringUtils.isNotEmpty(appApplyRequest.getPlatform())){
-            queryWrapper.eq(AppApply::getAppId,appApplyRequest.getPlatform());
+            queryWrapper.eq(AppApply::getPlatform,appApplyRequest.getPlatform());
         }
         if(StringUtils.isNotEmpty(appApplyRequest.getAppName())){
             queryWrapper.eq(AppApply::getAppName,appApplyRequest.getAppName());
