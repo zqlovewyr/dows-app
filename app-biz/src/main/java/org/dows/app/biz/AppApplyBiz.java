@@ -71,20 +71,30 @@ public class AppApplyBiz implements AppApplyApi {
      */
     @Override
     public Response<AppApply> getOneAppApply(AppApplyRequest appApplyRequest) {
-       LambdaQueryWrapper<AppApply> queryWrapper = new LambdaQueryWrapper<AppApply>();
+       LambdaQueryWrapper<AppApply> appApplyQueryWrapper = new LambdaQueryWrapper<AppApply>();
         if(StringUtils.isNotEmpty(appApplyRequest.getPlatform())){
-            queryWrapper.eq(AppApply::getPlatform,appApplyRequest.getPlatform());
+            appApplyQueryWrapper.eq(AppApply::getPlatform,appApplyRequest.getPlatform());
         }
         if(StringUtils.isNotEmpty(appApplyRequest.getAppName())){
-            queryWrapper.eq(AppApply::getAppName,appApplyRequest.getAppName());
+            appApplyQueryWrapper.eq(AppApply::getAppName,appApplyRequest.getAppName());
         }
-/*        if(StringUtils.isNotEmpty(appApplyRequest.getContactName())){
-            queryWrapper.eq("contact_name",appApplyRequest.getContactName());
+        AppApply appApply = appApplyService.getOne(appApplyQueryWrapper);
+        //未引入MPJ 当引入MPJ可使用join查询  但是要注意多表重名字段
+        if(appApply != null) {
+            LambdaQueryWrapper<AppApplyItem> appApplyItemQueryWrapper = new LambdaQueryWrapper<AppApplyItem>();
+            //applyOrderNo作为两表的关联字段  若不是需更改
+            appApplyItemQueryWrapper.eq(AppApplyItem::getApplyOrderNo, appApply.getApplyOrderNo());
+            if(StringUtils.isNotEmpty(appApplyRequest.getContactName())){
+                appApplyItemQueryWrapper.eq(AppApplyItem::getContactName,appApplyRequest.getContactName());
+            }
+            if(StringUtils.isNotEmpty(appApplyRequest.getContactPhone())){
+                appApplyItemQueryWrapper.eq(AppApplyItem::getContactPhone,appApplyRequest.getContactPhone());
+            }
+            AppApplyItem appApplyItem = appApplyItemService.getOne(appApplyItemQueryWrapper);
+            if (appApplyItem == null) {
+                return Response.ok(null);
+            }
         }
-        if(StringUtils.isNotEmpty(appApplyRequest.getContactPhone())){
-            queryWrapper.eq("contact_phone",appApplyRequest.getContactPhone());
-        }*/
-        AppApply appApply = appApplyService.getOne(queryWrapper);
         //Response.ok(appApply);
         return Response.ok(appApply);
     }
