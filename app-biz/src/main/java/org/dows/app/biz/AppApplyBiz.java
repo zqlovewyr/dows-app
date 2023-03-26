@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.dows.app.api.mini.AppApplyApi;
 import org.dows.app.api.mini.request.AppApplyRequest;
 import org.dows.app.api.mini.response.AppApplyResponse;
 import org.dows.app.entity.AppApply;
@@ -20,7 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Slf4j
 @RequiredArgsConstructor
 @Service
-public class AppApplyBiz {
+public class AppApplyBiz implements AppApplyApi {
 
     @Autowired
     private AppApplyService appApplyService;
@@ -29,6 +30,7 @@ public class AppApplyBiz {
     private AppApplyItemService appApplyItemService;
 
     @Transactional
+    @Override
     public Boolean saveApply(AppApplyRequest appApplyRequest) {
         // todo 保存AppApply
         AppApply appApply = BeanUtil.copyProperties(appApplyRequest, AppApply.class);
@@ -40,6 +42,7 @@ public class AppApplyBiz {
 
 
     @Transactional
+    @Override
     public Boolean updateApplyPlatformOrderNo(AppApplyRequest appApplyRequest) {
         // 更新AppApply
         LambdaQueryWrapper<AppApply> queryWrapperAppApply = new LambdaQueryWrapper();
@@ -66,6 +69,7 @@ public class AppApplyBiz {
      * @param appApplyRequest
      * @return
      */
+    @Override
     public Response<AppApply> getOneAppApply(AppApplyRequest appApplyRequest) {
        LambdaQueryWrapper<AppApply> queryWrapper = new LambdaQueryWrapper<AppApply>();
         if(StringUtils.isNotEmpty(appApplyRequest.getPlatform())){

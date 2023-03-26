@@ -2,6 +2,7 @@ package org.dows.app.api.mini;
 
 import org.dows.app.api.mini.request.AppApplyRequest;
 import org.dows.app.api.mini.response.AppApplyResponse;
+import org.dows.app.entity.AppApply;
 import org.dows.framework.api.Response;
 
 public interface AppApplyApi {
@@ -11,7 +12,7 @@ public interface AppApplyApi {
      * @param appApplyRequest
      * @return
      */
-    String saveApply(AppApplyRequest appApplyRequest);
+    Boolean saveApply(AppApplyRequest appApplyRequest);
 
     /**
      * 更新申请
@@ -27,5 +28,5 @@ public interface AppApplyApi {
      * @param appApplyRequest
      * @return
      */
-    AppApplyResponse getOneAppApply(AppApplyRequest appApplyRequest);
+    Response<AppApply> getOneAppApply(AppApplyRequest appApplyRequest);
 }

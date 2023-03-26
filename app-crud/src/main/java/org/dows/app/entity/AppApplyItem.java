@@ -1,5 +1,6 @@
 package org.dows.app.entity;
 
+import cn.hutool.core.annotation.Alias;
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableLogic;
@@ -34,39 +35,51 @@ public class AppApplyItem implements CrudEntity {
 
     @JsonFormat(shape = JsonFormat.Shape.STRING)
     @ApiModelProperty("主键ID")
+    @TableField(value = "id")
     private Long id;
 
     @ApiModelProperty("应用ID")
+    @TableField(value = "app_id")
     private String appId;
 
     @ApiModelProperty("小程序名称")
+    @TableField(value = "app_name")
     private String appName;
 
     @ApiModelProperty("应用或小程序申请订单编号")
+    @TableField(value = "apply_order_no")
     private String applyOrderNo;
 
     @ApiModelProperty("第三方平台申请单号（第三放平台回填）")
+    @TableField(value = "platform_order_no")
     private String platformOrderNo;
 
-    @ApiModelProperty("")
+    @ApiModelProperty("platform_account")
+    @TableField(value = "")
     private String platformAccount;
 
     @ApiModelProperty("第三方平台关联应用名")
+    @TableField(value = "platform_app_name")
     private String platformAppName;
 
     @ApiModelProperty("营业执照编号")
+    @TableField(value = "cert_no")
     private String certNo;
 
     @ApiModelProperty("法人")
+    @TableField(value = "legal_name")
     private String legalName;
 
     @ApiModelProperty("营业执照名称")
+    @TableField(value = "cert_name")
     private String certName;
 
     @ApiModelProperty("联系人手机")
+    @TableField(value = "contact_phone")
     private String contactPhone;
 
     @ApiModelProperty("联系人")
+    @TableField(value = "contact_name")
     private String contactName;
 
     @JsonIgnore
