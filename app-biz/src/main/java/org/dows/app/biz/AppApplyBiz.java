@@ -1,6 +1,7 @@
 package org.dows.app.biz;
 
 import cn.hutool.core.bean.BeanUtil;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,39 +29,35 @@ public class AppApplyBiz {
     private AppApplyItemService appApplyItemService;
 
     @Transactional
-    public String saveApply(AppApplyRequest appApplyRequest) {
+    public Boolean saveApply(AppApplyRequest appApplyRequest) {
         // todo 保存AppApply
         AppApply appApply = BeanUtil.copyProperties(appApplyRequest, AppApply.class);
         appApplyService.save(appApply);
         // todo 保存AppApplyItem
         AppApplyItem appApplyItem = BeanUtil.copyProperties(appApplyRequest, AppApplyItem.class);
-        appApplyItemService.save(appApplyItem);
-
-        return null;
+        return appApplyItemService.save(appApplyItem);
     }
 
 
     @Transactional
     public Boolean updateApplyPlatformOrderNo(AppApplyRequest appApplyRequest) {
         // 更新AppApply
-        QueryWrapper<AppApply> queryWrapperAppApply = new QueryWrapper();
+        LambdaQueryWrapper<AppApply> queryWrapperAppApply = new LambdaQueryWrapper();
         if(StringUtils.isNotEmpty(appApplyRequest.getPlatform())){
-            queryWrapperAppApply.eq("platform_order_no",appApplyRequest.getPlatformOrderNo());
+            queryWrapperAppApply.eq(AppApply::getPlatformOrderNo,appApplyRequest.getPlatformOrderNo());
         }
         AppApply appApply = new AppApply();
         appApply.setPlatformOrderNo(appApplyRequest.getPlatformOrderNo());
         appApplyService.update(appApply,queryWrapperAppApply);
         // 更新AppApplyItem
         // 更新AppApply
-        QueryWrapper<AppApplyItem> queryWrapperAppApplyItem = new QueryWrapper();
+        LambdaQueryWrapper<AppApplyItem> queryWrapperAppApplyItem = new LambdaQueryWrapper();
         if(StringUtils.isNotEmpty(appApplyRequest.getPlatform())){
-            queryWrapperAppApplyItem.eq("platform_order_no",appApplyRequest.getPlatformOrderNo());
+            queryWrapperAppApplyItem.eq(AppApplyItem::getPlatformOrderNo,appApplyRequest.getPlatformOrderNo());
         }
         AppApplyItem appApplyItem = new AppApplyItem();
         appApplyItem.setPlatformOrderNo(appApplyRequest.getPlatformOrderNo());
-        appApplyItemService.update(appApplyItem,queryWrapperAppApplyItem);
-        //return AppApplyResponse.builder().build();
-        return Boolean.FALSE;
+        return  appApplyItemService.update(appApplyItem,queryWrapperAppApplyItem);
     }
 
 
@@ -69,23 +66,23 @@ public class AppApplyBiz {
      * @param appApplyRequest
      * @return
      */
-    public AppApplyResponse getOneAppApply(AppApplyRequest appApplyRequest) {
-        QueryWrapper<AppApply> queryWrapper = new QueryWrapper();
+    public Response<AppApply> getOneAppApply(AppApplyRequest appApplyRequest) {
+       LambdaQueryWrapper<AppApply> queryWrapper = new LambdaQueryWrapper<AppApply>();
         if(StringUtils.isNotEmpty(appApplyRequest.getPlatform())){
-            queryWrapper.eq("platform",appApplyRequest.getPlatform());
+            queryWrapper.eq(AppApply::getAppId,appApplyRequest.getPlatform());
         }
         if(StringUtils.isNotEmpty(appApplyRequest.getAppName())){
-            queryWrapper.eq("app_name",appApplyRequest.getAppName());
+            queryWrapper.eq(AppApply::getAppName,appApplyRequest.getAppName());
         }
-        if(StringUtils.isNotEmpty(appApplyRequest.getContactName())){
+/*        if(StringUtils.isNotEmpty(appApplyRequest.getContactName())){
             queryWrapper.eq("contact_name",appApplyRequest.getContactName());
         }
         if(StringUtils.isNotEmpty(appApplyRequest.getContactPhone())){
             queryWrapper.eq("contact_phone",appApplyRequest.getContactPhone());
-        }
+        }*/
         AppApply appApply = appApplyService.getOne(queryWrapper);
-        // Response.ok(appApply);
-        return AppApplyResponse.builder().build();
+        //Response.ok(appApply);
+        return Response.ok(appApply);
     }
 
 }

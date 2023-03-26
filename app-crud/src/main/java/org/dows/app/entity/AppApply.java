@@ -34,44 +34,55 @@ public class AppApply implements CrudEntity {
 
     @JsonFormat(shape = JsonFormat.Shape.STRING)
     @ApiModelProperty("主键ID")
+    @TableField(value = "id")
     private Long id;
 
     @ApiModelProperty("应用类型")
+    @TableField(value = "categ_id")
     private String categId;
 
     @ApiModelProperty("应用或小程序申请订单编号(全局唯一)")
+    @TableField(value = "apply_order_no")
     private String applyOrderNo;
 
     @ApiModelProperty("应用ID(申请审核通过后回填)")
+    @TableField(value = "app_id")
     private String appId;
 
     @ApiModelProperty("应用名称")
+    @TableField(value = "app_name")
     private String appName;
 
-    @ApiModelProperty("")
+    @ApiModelProperty("平台")
+    @TableField(value = "platform")
     private String platform;
 
     @ApiModelProperty("第三方平台申请单号（第三放平台审核通过后回填）")
+    @TableField(value = "platform_order_no")
     private String platformOrderNo;
-
+    @TableField(value = "platform_app_id")
     @ApiModelProperty("第三方平台关联应用ID（第三放平台审核通过后回填）")
     private String platformAppId;
 
     @ApiModelProperty("第三方平台关联应用名(可以统一用appName)")
+    @TableField(value = "platform_app_name")
     private String platformAppName;
 
     @ApiModelProperty("申请人")
+    @TableField(value = "applicant")
     private String applicant;
 
     @ApiModelProperty("租户名称（付费对象）")
+    @TableField(value = "tenant_name")
     private String tenantName;
 
     @ApiModelProperty("租户ID")
+    @TableField(value = "tenant_id")
     private String tenantId;
 
     @JsonIgnore
     @TableLogic
-    @TableField(fill = FieldFill.INSERT)
+    @TableField(value = "deleted",fill = FieldFill.INSERT)
     @ApiModelProperty("逻辑删除")
     private Boolean deleted;
 
