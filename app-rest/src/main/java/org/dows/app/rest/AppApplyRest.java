@@ -6,7 +6,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.dows.app.api.mini.AppApplyApi;
 import org.dows.app.api.mini.request.AppApplyRequest;
-import org.dows.app.api.mini.response.AppApplyResponse;
 import org.dows.app.biz.AppApplyBiz;
 import org.dows.framework.crud.mybatis.MybatisCrudRest;
 import org.dows.app.entity.AppApply;
@@ -26,22 +25,22 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("appApply")
-public class AppApplyRest implements MybatisCrudRest<AppApplyForm, AppApply, AppApplyService>,AppApplyApi {
-    private final AppApplyBiz appApplyBiz;
-    @Override
-    public String saveApply(AppApplyRequest appApplyRequest) {
-        return null;
-    }
-
-    @Override
-    public Boolean updateApplyPlatformOrderNo(AppApplyRequest appApplyRequest) {
-        return null;
-    }
-
-    @Override
-    public AppApplyResponse getOneAppApply(AppApplyRequest appApplyRequest) {
-        return null;
-    }
+public class AppApplyRest implements MybatisCrudRest<AppApplyForm, AppApply, AppApplyService> {
+//    private final AppApplyBiz appApplyBiz;
+//    @Override
+//    public String saveApply(AppApplyRequest appApplyRequest) {
+//        return null;
+//    }
+//
+//    @Override
+//    public Boolean updateApplyPlatformOrderNo(AppApplyRequest appApplyRequest) {
+//        return null;
+//    }
+//
+//    @Override
+//    public AppApplyResponse getOneAppApply(AppApplyRequest appApplyRequest) {
+//        return null;
+//    }
 
 
 

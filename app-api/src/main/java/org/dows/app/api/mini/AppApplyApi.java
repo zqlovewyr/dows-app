@@ -1,7 +1,6 @@
 package org.dows.app.api.mini;
 
 import org.dows.app.api.mini.request.AppApplyRequest;
-import org.dows.app.api.mini.response.AppApplyResponse;
 import org.dows.app.entity.AppApply;
 import org.dows.framework.api.Response;
 

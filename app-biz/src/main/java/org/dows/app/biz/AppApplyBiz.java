@@ -2,13 +2,11 @@ package org.dows.app.biz;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.dows.app.api.mini.AppApplyApi;
 import org.dows.app.api.mini.request.AppApplyRequest;
-import org.dows.app.api.mini.response.AppApplyResponse;
 import org.dows.app.entity.AppApply;
 import org.dows.app.entity.AppApplyItem;
 import org.dows.app.service.AppApplyItemService;
